@@ -1,4 +1,6 @@
-async function showOrders(){
+<script>
+
+async function showOrders() {
 
   showStatus(`
     <div class="card">
@@ -6,8 +8,7 @@ async function showOrders(){
     </div>
   `);
 
-  const {data,error} =
-    await supabaseClient
+  const { data, error } = await supabaseClient
     .from("Ordres")
     .select(`
       *,
@@ -18,9 +19,9 @@ async function showOrders(){
         telephone
       )
     `)
-    .order("id",{ascending:false});
+    .order("id", { ascending: false });
 
-  if(error){
+  if (error) {
 
     showStatus(`
       <div class="card">
@@ -31,8 +32,7 @@ async function showOrders(){
     return;
   }
 
-  let html=`
-
+  let html = `
     <div class="card">
 
       <h3>🛵 Orders</h3>
@@ -45,22 +45,19 @@ async function showOrders(){
       </button>
 
     </div>
-
   `;
 
-  if(!data || data.length===0){
+  if (!data || data.length === 0) {
 
-    html+=`
-
+    html += `
       <div class="card">
         مازال ماكاين حتى Order.
       </div>
-
     `;
 
-  }else{
+  } else {
 
-    data.forEach(order=>{
+    data.forEach(order => {
 
       const customer = order.Customers || {};
 
@@ -69,8 +66,17 @@ async function showOrders(){
         customer.nom ||
         "Customer";
 
-      html+=`
+      const customerPhone =
+        customer.phone ||
+        customer.telephone ||
+        "—";
 
+      const total =
+        order.total ??
+        order.amount ??
+        0;
+
+      html += `
         <div class="card">
 
           <h3>
@@ -84,20 +90,20 @@ async function showOrders(){
 
           <br><br>
 
-          📞 ${customer.phone || customer.telephone || "—"}
+          📞 ${customerPhone}
 
           <br><br>
 
           💰 Total:
-          <b>${order.total || order.amount || 0} DH</b>
+          <b>${total} DH</b>
 
         </div>
-
       `;
 
     });
-
   }
 
   showStatus(html);
 }
+
+</script>
