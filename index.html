@@ -1,300 +1,1031 @@
-```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>SKHAWA LIVRILI</title>
+<title>SKHAWA LIVRILI</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
 
-    body {
-      background: #f5f5f5;
-      color: #222;
-    }
+body{
+  background:#f3f3f3;
+  color:#222;
+}
 
-    header {
-      background: #111;
-      color: white;
-      padding: 25px 20px;
-      text-align: center;
-    }
+header{
+  background:#111;
+  color:white;
+  padding:25px 18px;
+  text-align:center;
+}
 
-    header h1 {
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
+header h1{
+  font-size:28px;
+  margin-bottom:7px;
+}
 
-    header p {
-      font-size: 15px;
-    }
+header p{
+  font-size:15px;
+}
 
-    .container {
-      padding: 25px 18px;
-      max-width: 600px;
-      margin: auto;
-    }
+.container{
+  max-width:600px;
+  margin:auto;
+  padding:20px 16px;
+}
 
-    .welcome {
-      background: white;
-      padding: 20px;
-      border-radius: 18px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }
+.welcome{
+  background:white;
+  padding:20px;
+  border-radius:18px;
+  margin-bottom:18px;
+  box-shadow:0 4px 15px rgba(0,0,0,.07);
+}
 
-    .welcome h2 {
-      margin-bottom: 8px;
-    }
+.buttons{
+  display:grid;
+  gap:10px;
+}
 
-    .buttons {
-      display: grid;
-      gap: 15px;
-    }
+button{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:16px;
+  font-size:16px;
+  font-weight:bold;
+  background:#111;
+  color:white;
+}
 
-    button {
-      border: none;
-      border-radius: 15px;
-      padding: 18px;
-      font-size: 17px;
-      font-weight: bold;
-      background: #111;
-      color: white;
-      cursor: pointer;
-    }
+button.secondary{
+  background:#666;
+}
 
-    button:active {
-      transform: scale(0.98);
-    }
+button.danger{
+  background:#b00020;
+}
 
-    #status {
-      margin-top: 20px;
-      padding: 15px;
-      background: white;
-      border-radius: 15px;
-      display: none;
-    }
+input,select{
+  width:100%;
+  padding:14px;
+  margin:7px 0;
+  border:1px solid #ddd;
+  border-radius:12px;
+  font-size:16px;
+  background:white;
+}
 
-    footer {
-      text-align: center;
-      padding: 30px 10px;
-      color: #777;
-      font-size: 13px;
-    }
-  </style>
+#status{
+  margin-top:20px;
+}
+
+.card{
+  background:white;
+  padding:16px;
+  border-radius:15px;
+  margin-bottom:10px;
+  box-shadow:0 3px 10px rgba(0,0,0,.06);
+}
+
+.card h3{
+  margin-bottom:8px;
+}
+
+.stat{
+  background:white;
+  padding:18px;
+  border-radius:15px;
+  margin-bottom:10px;
+  text-align:center;
+}
+
+.stat-number{
+  font-size:30px;
+  font-weight:bold;
+  margin-top:7px;
+}
+
+.search{
+  margin-bottom:15px;
+}
+
+.back{
+  margin-bottom:12px;
+}
+
+small{
+  color:#777;
+}
+
+footer{
+  text-align:center;
+  padding:30px 10px;
+  color:#777;
+  font-size:13px;
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <h1>SKHAWA LIVRILI 🛵</h1>
-    <p>سخاوة فالقلب ❤️ وليفري فالوقت ⏱️</p>
-  </header>
+<header>
+  <h1>SKHAWA LIVRILI 🛵</h1>
+  <p>سخاوة فالقلب ❤️ وليفري فالوقت ⏱️</p>
+</header>
 
-  <main class="container">
+<main class="container">
 
-    <div class="welcome">
-      <h2>مرحبا بك 👋</h2>
-      <p>مرحبا بك فـ SKHAWA LIVRILI</p>
+  <div class="welcome">
+    <h2>مرحبا بك 👋</h2>
+    <p>مرحبا بك فـ SKHAWA LIVRILI</p>
+  </div>
+
+  <div class="buttons">
+
+    <button onclick="showCustomers()">
+      👤 Customers
+    </button>
+
+    <button onclick="showAddCustomer()">
+      ➕ Ajouter Customer
+    </button>
+
+    <button onclick="showOrders()">
+      🛵 Orders
+    </button>
+
+    <button onclick="showAddOrder()">
+      ➕ Ajouter Order
+    </button>
+
+    <button onclick="showPoints()">
+      ⭐ Points
+    </button>
+
+    <button onclick="showDashboard()">
+      📊 Dashboard
+    </button>
+
+  </div>
+
+  <div id="status"></div>
+
+</main>
+
+<footer>
+  SKHAWA LIVRILI © 2026
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+/* ============================
+   SUPABASE
+============================ */
+
+const SUPABASE_URL =
+"https://crnkygjsyaadfjqnzkhh.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_-8hnrRPUy8k1EdNfUzkBHg_URwtmRHI";
+
+const supabaseClient =
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+/* ============================
+   STATUS
+============================ */
+
+function showStatus(html){
+  document.getElementById("status").innerHTML = html;
+}
+
+
+/* ============================
+   CUSTOMERS
+============================ */
+
+async function showCustomers(){
+
+  showStatus(`
+    <div class="card">
+      ⏳ كنجيبو Customers...
+    </div>
+  `);
+
+  const {data,error} =
+    await supabaseClient
+    .from("Customers")
+    .select("*")
+    .order("id",{ascending:false});
+
+  if(error){
+    showStatus(`
+      <div class="card">
+        ❌ ${error.message}
+      </div>
+    `);
+    return;
+  }
+
+  let html=`
+
+    <div class="card">
+
+      <h3>👤 Customers</h3>
+
+      <input
+        class="search"
+        id="customerSearch"
+        placeholder="🔎 قلب على Customer..."
+        oninput="filterCustomers()"
+      >
+
     </div>
 
-    <div class="buttons">
+    <div id="customersList">
+  `;
+
+  if(!data || data.length===0){
+
+    html+=`
+      <div class="card">
+        مازال ماكاين حتى Customer.
+      </div>
+    `;
+
+  }else{
+
+    data.forEach(customer=>{
+
+      html+=`
+
+        <div
+          class="card customer-item"
+          data-search="${(
+            (customer.name || "")+" "+
+            (customer.nom || "")+" "+
+            (customer.phone || "")+" "+
+            (customer.telephone || "")
+          ).toLowerCase()}"
+        >
+
+          <h3>
+            👤 ${customer.name || customer.nom || "Customer"}
+          </h3>
+
+          <p>
+            📞 ${customer.phone || customer.telephone || "—"}
+          </p>
+
+          <p>
+            ⭐ ${customer.points || 0} Points
+          </p>
+
+          <br>
+
+          <button
+            onclick="showCustomerDetails('${customer.id}')"
+          >
+            👁️ Voir détails
+          </button>
+
+        </div>
+
+      `;
+
+    });
+
+  }
+
+  html+=`</div>`;
+
+  showStatus(html);
+}
+
+
+/* ============================
+   CUSTOMER SEARCH
+============================ */
+
+function filterCustomers(){
+
+  const search =
+    document
+    .getElementById("customerSearch")
+    .value
+    .toLowerCase();
+
+  const customers =
+    document.querySelectorAll(".customer-item");
+
+  customers.forEach(customer=>{
+
+    customer.style.display =
+      customer.dataset.search.includes(search)
+      ? "block"
+      : "none";
+
+  });
+}
+
+
+/* ============================
+   CUSTOMER DETAILS
+============================ */
+
+async function showCustomerDetails(id){
+
+  showStatus(`
+    <div class="card">
+      ⏳ كنجيبو معلومات Customer...
+    </div>
+  `);
+
+  const {data:customer,error} =
+    await supabaseClient
+    .from("Customers")
+    .select("*")
+    .eq("id",id)
+    .single();
+
+  if(error){
+
+    showStatus(`
+      <div class="card">
+        ❌ ${error.message}
+      </div>
+    `);
+
+    return;
+  }
+
+  const {data:orders} =
+    await supabaseClient
+    .from("Ordres")
+    .select("*")
+    .eq("customer_id",id)
+    .order("id",{ascending:false});
+
+
+  let html=`
+
+    <button
+      class="secondary back"
+      onclick="showCustomers()"
+    >
+      ← رجوع
+    </button>
+
+    <div class="card">
+
+      <h2>
+        👤 ${customer.name || customer.nom || "Customer"}
+      </h2>
+
+      <br>
+
+      📞 ${customer.phone || customer.telephone || "—"}
+
+      <br><br>
+
+      ⭐ Points:
+      <b>${customer.points || 0}</b>
+
+      <br><br>
+
+      🛵 Orders:
+      <b>${customer.Total_orders || 0}</b>
+
+    </div>
+
+    <div class="card">
+
+      <h3>🛵 Orders ديالو</h3>
+
+      <br>
+  `;
+
+
+  if(!orders || orders.length===0){
+
+    html+=`
+      مازال ماعندو حتى Order.
+    `;
+
+  }else{
+
+    orders.forEach(order=>{
+
+      html+=`
+
+        <div class="card">
+
+          🛵 Order #${order.id || ""}
+
+          <br><br>
+
+          💰 Total:
+          ${order.total || order.amount || 0} DH
+
+        </div>
+
+      `;
+
+    });
+
+  }
+
+  html+=`
+    </div>
+  `;
+
+  showStatus(html);
+}
+
+
+/* ============================
+   ADD CUSTOMER
+============================ */
+
+function showAddCustomer(){
+
+  showStatus(`
+
+    <div class="card">
+
+      <h3>➕ Ajouter Customer</h3>
+
+      <br>
+
+      <input
+        id="customerName"
+        placeholder="Nom du client"
+      >
+
+      <input
+        id="customerPhone"
+        placeholder="Téléphone"
+        type="tel"
+      >
+
+      <button onclick="addCustomer()">
+        💾 Enregistrer
+      </button>
+
+    </div>
+
+  `);
+}
+
+
+async function addCustomer(){
+
+  const name =
+    document.getElementById("customerName")
+    .value.trim();
+
+  const phone =
+    document.getElementById("customerPhone")
+    .value.trim();
+
+  if(!name){
+
+    alert("دخل اسم Customer");
+
+    return;
+  }
+
+  showStatus(`
+    <div class="card">
+      ⏳ كنضيفو Customer...
+    </div>
+  `);
+
+
+  const {error} =
+    await supabaseClient
+    .from("Customers")
+    .insert([{
+
+      name:name,
+      phone:phone,
+      points:0,
+      Total_orders:0
+
+    }]);
+
+
+  if(error){
+
+    showStatus(`
+      <div class="card">
+        ❌ ${error.message}
+      </div>
+    `);
+
+    return;
+  }
+
+
+  showStatus(`
+
+    <div class="card">
+
+      <h3>✅ Customer تزاد بنجاح!</h3>
+
+      <br>
+
+      👤 ${name}
+
+      <br>
+
+      📞 ${phone || "—"}
+
+      <br><br>
 
       <button onclick="showCustomers()">
-        👤 Customers
-      </button>
-
-      <button onclick="showOrders()">
-        🛵 Orders
-      </button>
-
-      <button onclick="showPoints()">
-        ⭐ Points
-      </button>
-
-      <button onclick="showDashboard()">
-        📊 Dashboard
+        👤 شوف Customers
       </button>
 
     </div>
 
-    <div id="status"></div>
-
-  </main>
-
-  <footer>
-    SKHAWA LIVRILI © 2026
-  </footer>
+  `);
+}
 
 
-  <!-- Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+/* ============================
+   ORDERS
+============================ */
 
-  <script>
+async function showOrders(){
 
-    // ==============================
-    // SUPABASE CONFIGURATION
-    // ==============================
-
-    const SUPABASE_URL = "https://crnkygjsyaadfjqnzkhh.supabase.co/rest/v1/";
-
-    const SUPABASE_KEY = "const SUPABASE_URL = "https://crnkygjsyaadfjqnzkhh.supabase.co";";
-
-    const supabaseClient = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+  showStatus(`
+    <div class="card">
+      ⏳ كنجيبو Orders...
+    </div>
+  `);
 
 
-    // ==============================
-    // STATUS
-    // ==============================
-
-    function showStatus(message) {
-      const status = document.getElementById("status");
-
-      status.style.display = "block";
-      status.innerHTML = message;
-    }
+  const {data,error} =
+    await supabaseClient
+    .from("Ordres")
+    .select("*")
+    .order("id",{ascending:false});
 
 
-    // ==============================
-    // CUSTOMERS
-    // ==============================
+  if(error){
 
-    async function showCustomers() {
+    showStatus(`
+      <div class="card">
+        ❌ ${error.message}
+      </div>
+    `);
 
-      showStatus("⏳ كنجيبو Customers...");
-
-      const { data, error } = await supabaseClient
-        .from("Customers")
-        .select("*");
-
-      if (error) {
-        showStatus("❌ وقع مشكل: " + error.message);
-        return;
-      }
-
-      if (!data || data.length === 0) {
-        showStatus("👤 مازال ماكاين حتى Customer.");
-        return;
-      }
-
-      let html = "<h3>👤 Customers</h3><br>";
-
-      data.forEach(customer => {
-        html += `
-          <div style="
-            padding:12px;
-            margin-bottom:10px;
-            background:#f5f5f5;
-            border-radius:12px;
-          ">
-            ${customer.name || customer.nom || "Customer"}
-          </div>
-        `;
-      });
-
-      showStatus(html);
-    }
+    return;
+  }
 
 
-    // ==============================
-    // ORDERS
-    // ==============================
+  let html=`
 
-    async function showOrders() {
+    <div class="card">
 
-      showStatus("⏳ كنجيبو Orders...");
+      <h3>🛵 Orders</h3>
 
-      const { data, error } = await supabaseClient
-        .from("Ordres")
-        .select("*");
+    </div>
 
-      if (error) {
-        showStatus("❌ وقع مشكل: " + error.message);
-        return;
-      }
-
-      if (!data || data.length === 0) {
-        showStatus("🛵 مازال ماكاين حتى Order.");
-        return;
-      }
-
-      let html = "<h3>🛵 Orders</h3><br>";
-
-      data.forEach(order => {
-        html += `
-          <div style="
-            padding:12px;
-            margin-bottom:10px;
-            background:#f5f5f5;
-            border-radius:12px;
-          ">
-            Order #${order.id || ""}
-          </div>
-        `;
-      });
-
-      showStatus(html);
-    }
+  `;
 
 
-    // ==============================
-    // POINTS
-    // ==============================
+  if(!data || data.length===0){
 
-    function showPoints() {
+    html+=`
 
-      showStatus(`
-        <h3>⭐ Points</h3>
-        <br>
-        نظام النقاط غادي نكملوه من بعد.
-      `);
+      <div class="card">
+        مازال ماكاين حتى Order.
+      </div>
 
-    }
+    `;
+
+  }else{
+
+    data.forEach(order=>{
+
+      html+=`
+
+        <div class="card">
+
+          <h3>
+            🛵 Order #${order.id || ""}
+          </h3>
+
+          <br>
+
+          👤 Customer ID:
+          ${order.customer_id || "—"}
+
+          <br><br>
+
+          💰 Total:
+          <b>${order.total || order.amount || 0} DH</b>
+
+        </div>
+
+      `;
+
+    });
+
+  }
+
+  showStatus(html);
+}
 
 
-    // ==============================
-    // DASHBOARD
-    // ==============================
+/* ============================
+   ADD ORDER
+============================ */
 
-    async function showDashboard() {
+async function showAddOrder(){
 
-      showStatus("⏳ كنحسبو البيانات...");
+  showStatus(`
+    <div class="card">
+      ⏳ كنجيبو Customers...
+    </div>
+  `);
 
-      const customers = await supabaseClient
-        .from("Customers")
-        .select("*", { count: "exact", head: true });
 
-      const orders = await supabaseClient
-        .from("Ordres")
-        .select("*", { count: "exact", head: true });
+  const {data,error} =
+    await supabaseClient
+    .from("Customers")
+    .select("id,name,nom")
+    .order("id",{ascending:false});
 
-      if (customers.error || orders.error) {
-        showStatus("❌ وقع مشكل فـ Dashboard.");
-        return;
-      }
 
-      showStatus(`
-        <h3>📊 Dashboard</h3>
-        <br>
-        👤 Customers: <b>${customers.count || 0}</b>
+  if(error){
+
+    showStatus(`
+      <div class="card">
+        ❌ ${error.message}
+      </div>
+    `);
+
+    return;
+  }
+
+
+  if(!data || data.length===0){
+
+    showStatus(`
+
+      <div class="card">
+
+        ❌ خاصك تزيد Customer أولاً.
+
         <br><br>
-        🛵 Orders: <b>${orders.count || 0}</b>
-      `);
 
-    }
+        <button onclick="showAddCustomer()">
+          ➕ Ajouter Customer
+        </button>
 
-  </script>
+      </div>
+
+    `);
+
+    return;
+  }
+
+
+  let options="";
+
+  data.forEach(customer=>{
+
+    options+=`
+
+      <option value="${customer.id}">
+        ${customer.name || customer.nom || "Customer"}
+      </option>
+
+    `;
+
+  });
+
+
+  showStatus(`
+
+    <div class="card">
+
+      <h3>➕ Ajouter Order</h3>
+
+      <br>
+
+      <label>👤 Customer</label>
+
+      <select id="orderCustomer">
+        ${options}
+      </select>
+
+      <input
+        id="orderTotal"
+        type="number"
+        step="0.01"
+        placeholder="💰 Total en DH"
+      >
+
+      <button onclick="addOrder()">
+        🛵 Enregistrer Order
+      </button>
+
+    </div>
+
+  `);
+}
+
+
+/* ============================
+   INSERT ORDER
+============================ */
+
+async function addOrder(){
+
+  const customerId =
+    document.getElementById("orderCustomer")
+    .value;
+
+  const total =
+    document.getElementById("orderTotal")
+    .value;
+
+
+  if(!total){
+
+    alert("دخل Total ديال Order");
+
+    return;
+  }
+
+
+  showStatus(`
+    <div class="card">
+      ⏳ كنضيفو Order...
+    </div>
+  `);
+
+
+  const {error} =
+    await supabaseClient
+    .from("Ordres")
+    .insert([{
+
+      customer_id:customerId,
+      total:Number(total)
+
+    }]);
+
+
+  if(error){
+
+    showStatus(`
+      <div class="card">
+        ❌ ${error.message}
+      </div>
+    `);
+
+    return;
+  }
+
+
+  /* تحديث Customer */
+
+  const {data:customer} =
+    await supabaseClient
+    .from("Customers")
+    .select("Total_orders,points")
+    .eq("id",customerId)
+    .single();
+
+
+  if(customer){
+
+    const newOrders =
+      Number(customer.Total_orders || 0)+1;
+
+    const newPoints =
+      Number(customer.points || 0)
+      + Math.floor(Number(total));
+
+
+    await supabaseClient
+    .from("Customers")
+    .update({
+
+      Total_orders:newOrders,
+      points:newPoints
+
+    })
+    .eq("id",customerId);
+
+  }
+
+
+  showStatus(`
+
+    <div class="card">
+
+      <h3>✅ Order تزاد بنجاح!</h3>
+
+      <br>
+
+      🛵 الطلب تسجل
+
+      <br><br>
+
+      ⭐ Points تزادو للـCustomer
+
+      <br><br>
+
+      <button onclick="showOrders()">
+        🛵 شوف Orders
+      </button>
+
+    </div>
+
+  `);
+}
+
+
+/* ============================
+   POINTS
+============================ */
+
+async function showPoints(){
+
+  showStatus(`
+    <div class="card">
+      ⏳ كنجيبو Points...
+    </div>
+  `);
+
+
+  const {data,error} =
+    await supabaseClient
+    .from("Customers")
+    .select("name,nom,points")
+    .order("points",{ascending:false});
+
+
+  if(error){
+
+    showStatus(`
+      <div class="card">
+        ❌ ${error.message}
+      </div>
+    `);
+
+    return;
+  }
+
+
+  let html=`
+
+    <div class="card">
+
+      <h3>⭐ Points</h3>
+
+    </div>
+
+  `;
+
+
+  if(!data || data.length===0){
+
+    html+=`
+      <div class="card">
+        مازال ماكاين حتى Customer.
+      </div>
+    `;
+
+  }else{
+
+    data.forEach(customer=>{
+
+      html+=`
+
+        <div class="card">
+
+          👤
+          <b>
+            ${customer.name || customer.nom || "Customer"}
+          </b>
+
+          <br><br>
+
+          ⭐
+          <b>
+            ${customer.points || 0}
+          </b>
+          Points
+
+        </div>
+
+      `;
+
+    });
+
+  }
+
+  showStatus(html);
+}
+
+
+/* ============================
+   DASHBOARD
+============================ */
+
+async function showDashboard(){
+
+  showStatus(`
+    <div class="card">
+      ⏳ كنحسبو البيانات...
+    </div>
+  `);
+
+
+  const customers =
+    await supabaseClient
+    .from("Customers")
+    .select("*",{count:"exact",head:true});
+
+
+  const orders =
+    await supabaseClient
+    .from("Ordres")
+    .select("*",{count:"exact",head:true});
+
+
+  if(customers.error || orders.error){
+
+    showStatus(`
+      <div class="card">
+        ❌ وقع مشكل فـ Dashboard.
+      </div>
+    `);
+
+    return;
+  }
+
+
+  showStatus(`
+
+    <div class="stat">
+
+      👤 Customers
+
+      <div class="stat-number">
+        ${customers.count || 0}
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      🛵 Orders
+
+      <div class="stat-number">
+        ${orders.count || 0}
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      ⭐ نظام Points
+
+      <div class="stat-number">
+        فعال
+      </div>
+
+    </div>
+
+  `);
+}
+
+</script>
 
 </body>
 </html>
-```
