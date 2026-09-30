@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -73,6 +74,14 @@
       transform: scale(0.98);
     }
 
+    #status {
+      margin-top: 20px;
+      padding: 15px;
+      background: white;
+      border-radius: 15px;
+      display: none;
+    }
+
     footer {
       text-align: center;
       padding: 30px 10px;
@@ -98,23 +107,25 @@
 
     <div class="buttons">
 
-      <button onclick="showMessage('Customers')">
+      <button onclick="showCustomers()">
         👤 Customers
       </button>
 
-      <button onclick="showMessage('Orders')">
+      <button onclick="showOrders()">
         🛵 Orders
       </button>
 
-      <button onclick="showMessage('Points')">
+      <button onclick="showPoints()">
         ⭐ Points
       </button>
 
-      <button onclick="showMessage('Dashboard')">
+      <button onclick="showDashboard()">
         📊 Dashboard
       </button>
 
     </div>
+
+    <div id="status"></div>
 
   </main>
 
@@ -122,11 +133,168 @@
     SKHAWA LIVRILI © 2026
   </footer>
 
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script>
-    function showMessage(page) {
-      alert("غادي نفتحو صفحة " + page + " قريباً 🚀");
+
+    // ==============================
+    // SUPABASE CONFIGURATION
+    // ==============================
+
+    const SUPABASE_URL = "https://crnkygjsyaadfjqnzkhh.supabase.co/rest/v1/";
+
+    const SUPABASE_KEY = "sb_publishable_-8hnrRPUy8k1EdNfUzkBHg_URwtmRHI";
+
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+
+    // ==============================
+    // STATUS
+    // ==============================
+
+    function showStatus(message) {
+      const status = document.getElementById("status");
+
+      status.style.display = "block";
+      status.innerHTML = message;
     }
+
+
+    // ==============================
+    // CUSTOMERS
+    // ==============================
+
+    async function showCustomers() {
+
+      showStatus("⏳ كنجيبو Customers...");
+
+      const { data, error } = await supabaseClient
+        .from("Customers")
+        .select("*");
+
+      if (error) {
+        showStatus("❌ وقع مشكل: " + error.message);
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        showStatus("👤 مازال ماكاين حتى Customer.");
+        return;
+      }
+
+      let html = "<h3>👤 Customers</h3><br>";
+
+      data.forEach(customer => {
+        html += `
+          <div style="
+            padding:12px;
+            margin-bottom:10px;
+            background:#f5f5f5;
+            border-radius:12px;
+          ">
+            ${customer.name || customer.nom || "Customer"}
+          </div>
+        `;
+      });
+
+      showStatus(html);
+    }
+
+
+    // ==============================
+    // ORDERS
+    // ==============================
+
+    async function showOrders() {
+
+      showStatus("⏳ كنجيبو Orders...");
+
+      const { data, error } = await supabaseClient
+        .from("Ordres")
+        .select("*");
+
+      if (error) {
+        showStatus("❌ وقع مشكل: " + error.message);
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        showStatus("🛵 مازال ماكاين حتى Order.");
+        return;
+      }
+
+      let html = "<h3>🛵 Orders</h3><br>";
+
+      data.forEach(order => {
+        html += `
+          <div style="
+            padding:12px;
+            margin-bottom:10px;
+            background:#f5f5f5;
+            border-radius:12px;
+          ">
+            Order #${order.id || ""}
+          </div>
+        `;
+      });
+
+      showStatus(html);
+    }
+
+
+    // ==============================
+    // POINTS
+    // ==============================
+
+    function showPoints() {
+
+      showStatus(`
+        <h3>⭐ Points</h3>
+        <br>
+        نظام النقاط غادي نكملوه من بعد.
+      `);
+
+    }
+
+
+    // ==============================
+    // DASHBOARD
+    // ==============================
+
+    async function showDashboard() {
+
+      showStatus("⏳ كنحسبو البيانات...");
+
+      const customers = await supabaseClient
+        .from("Customers")
+        .select("*", { count: "exact", head: true });
+
+      const orders = await supabaseClient
+        .from("Ordres")
+        .select("*", { count: "exact", head: true });
+
+      if (customers.error || orders.error) {
+        showStatus("❌ وقع مشكل فـ Dashboard.");
+        return;
+      }
+
+      showStatus(`
+        <h3>📊 Dashboard</h3>
+        <br>
+        👤 Customers: <b>${customers.count || 0}</b>
+        <br><br>
+        🛵 Orders: <b>${orders.count || 0}</b>
+      `);
+
+    }
+
   </script>
 
 </body>
 </html>
+```
